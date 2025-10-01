@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileMaster Pro - All-in-One File Editing & Conversion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #7209b7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --gray: #6c757d;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            border: 2px solid var(--accent);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--dark);
+        }
+        
+        .file-upload-area {
+            background-color: white;
+            border: 2px dashed var(--primary);
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-upload-area:hover {
+            background-color: #f0f4ff;
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            font-size: 2rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .feature-list {
+            list-style-type: none;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-list li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 3rem 0;
+            background-color: white;
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background-color: var(--primary);
+            z-index: 1;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        /* Tools Section */
+        .tools {
+            padding: 3rem 0;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tool-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--success);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--success);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .steps {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .steps::before {
+                display: none;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Active Tool Display */
+        .active-tool {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: none;
+        }
+        
+        .active-tool h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .tool-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .option-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option-card:hover {
+            background: #e9ecef;
+            transform: translateY(-3px);
+        }
+        
+        .option-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .preview-area {
+            border: 1px dashed #ccc;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 1.5rem;
+            background: #f8f9fa;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+            border: 2px solid var(--success);
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+            color: white;
+            border: 2px solid var(--warning);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fas fa-file-alt"></i></div>
+                    <h1>FileMaster Pro</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#tools">Tools</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline">Login</button>
+                    <button class="btn btn-primary">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>All-in-One File Editing & Conversion Platform</h2>
+            <p>Resize, edit, convert, and enhance your files with our powerful online tools. Support for photos, PDFs, text files, and more!</p>
+            
+            <div class="file-upload-area" id="uploadArea">
+                <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <h3>Drag & Drop Your Files Here</h3>
+                <p>or click to browse your device</p>
+                <p class="small">Supports: JPG, PNG, PDF, DOC, TXT, HTML and more</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Powerful File Editing Features</h2>
+            
+            <div class="features-grid">
+                <!-- Feature 1: File Resize -->
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-expand-alt"></i></div>
+                    <h3>1. File Resize</h3>
+                    <p>Resize any file type including photos, PDFs, text files, and more</p>
+                    <ul class="feature-list">
+                        <li>Adjust dimensions and resolution</li>
+                        <li>Maintain aspect ratio or custom sizes</li>
+                        <li>Batch resize multiple files</li>
+                        <li>Optimize for web or print</li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 2: File Edit -->
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-edit"></i></div>
+                    <h3>2. File Editing</h3>
+                    <p>Comprehensive editing tools for all your file needs</p>
+                    <ul class="feature-list">
+                        <li>Add watermarks and signatures</li>
+                        <li>Insert objects, text, and shapes</li>
+                        <li>E-signature capabilities</li>
+                        <li>Annotation and markup tools</li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 3: File Conversion -->
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <h3>3. File Conversion</h3>
+                    <p>Convert between multiple file formats seamlessly</p>
+                    <ul class="feature-list">
+                        <li>Photo to PDF conversion</li>
+                        <li>PDF to text extraction</li>
+                        <li>Text to PDF creation</li>
+                        <li>HTML to PDF rendering</li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 4: PDF Editing -->
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-file-pdf"></i></div>
+                    <h3>4. PDF Editing</h3>
+                    <p>Advanced PDF manipulation and enhancement tools</p>
+                    <ul class="feature-list">
+                        <li>Change colors and text size</li>
+                        <li>Customize backgrounds</li>
+                        <li>Minimize and maximize elements</li>
+                        <li>Add frames and design elements</li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 5: Photo Album Creation -->
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-images"></i></div>
+                    <h3>5. Photo Album Creation</h3>
+                    <p>Create stunning photo albums with unique presentation styles</p>
+                    <ul class="feature-list">
+                        <li>3D album creation</li>
+                        <li>Unique photo display types</li>
+                        <li>Custom layouts and themes</li>
+                        <li>Interactive viewing experiences</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="tools" id="tools">
+        <div class="container">
+            <h2 class="section-title">Our File Tools</h2>
+            
+            <div class="tools-grid">
+                <div class="tool-card" data-tool="resize">
+                    <div class="tool-icon"><i class="fas fa-expand-alt"></i></div>
+                    <h3>Resize Files</h3>
+                    <p>Change dimensions of any file type</p>
+                </div>
+                
+                <div class="tool-card" data-tool="edit">
+                    <div class="tool-icon"><i class="fas fa-edit"></i></div>
+                    <h3>Edit Files</h3>
+                    <p>Add watermarks, signatures & objects</p>
+                </div>
+                
+                <div class="tool-card" data-tool="convert">
+                    <div class="tool-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <h3>Convert Files</h3>
+                    <p>Change between different formats</p>
+                </div>
+                
+                <div class="tool-card" data-tool="pdf">
+                    <div class="tool-icon"><i class="fas fa-file-pdf"></i></div>
+                    <h3>PDF Editing</h3>
+                    <p>Advanced PDF manipulation tools</p>
+                </div>
+                
+                <div class="tool-card" data-tool="album">
+                    <div class="tool-icon"><i class="fas fa-images"></i></div>
+                    <h3>Photo Albums</h3>
+                    <p>Create stunning photo collections</p>
+                </div>
+            </div>
+            
+            <!-- Active Tool Display -->
+            <div class="active-tool" id="activeTool">
+                <h3 id="toolTitle">Tool Options</h3>
+                
+                <div class="tool-options" id="toolOptions">
+                    <!-- Options will be dynamically inserted here -->
+                </div>
+                
+                <div class="preview-area" id="previewArea">
+                    <i class="fas fa-file-image" style="font-size: 3rem; color: #6c757d; margin-bottom: 1rem;"></i>
+                    <p>File preview will appear here after upload</p>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-success" id="processBtn">Process File</button>
+                    <button class="btn btn-warning" id="downloadBtn">Download Result</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Upload File</h3>
+                    <p>Drag & drop or select your file from device</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Choose Tool</h3>
+                    <p>Select the editing or conversion option you need</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Customize</h3>
+                    <p>Adjust settings and apply your changes</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Download</h3>
+                    <p>Save your edited file in desired format</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>FileMaster Pro</h3>
+                    <p>Your all-in-one solution for file editing, conversion, and enhancement.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#tools">Tools</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-tool="resize">File Resize</a></li>
+                        <li><a href="#" data-tool="edit">File Edit</a></li>
+                        <li><a href="#" data-tool="convert">File Convert</a></li>
+                        <li><a href="#" data-tool="pdf">PDF Edit</a></li>
+                        <li><a href="#" data-tool="album">Photo Album</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 FileMaster Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tool data with options for each tool
+        const toolData = {
+            resize: {
+                title: "File Resize Tool",
+                options: [
+                    { icon: "fas fa-ruler-combined", text: "Custom Dimensions", description: "Set exact width and height" },
+                    { icon: "fas fa-crop-alt", text: "Crop Image", description: "Remove unwanted areas" },
+                    { icon: "fas fa-arrows-alt", text: "Maintain Aspect Ratio", description: "Keep original proportions" },
+                    { icon: "fas fa-layer-group", text: "Batch Resize", description: "Resize multiple files at once" }
+                ]
+            },
+            edit: {
+                title: "File Editing Tool",
+                options: [
+                    { icon: "fas fa-tint", text: "Add Watermark", description: "Protect your files with watermark" },
+                    { icon: "fas fa-signature", text: "E-Signature", description: "Add digital signature" },
+                    { icon: "fas fa-shapes", text: "Add Objects", description: "Insert shapes and graphics" },
+                    { icon: "fas fa-font", text: "Add Text", description: "Insert custom text elements" }
+                ]
+            },
+            convert: {
+                title: "File Conversion Tool",
+                options: [
+                    { icon: "fas fa-file-image", text: "Photo to PDF", description: "Convert images to PDF documents" },
+                    { icon: "fas fa-file-alt", text: "PDF to Text", description: "Extract text from PDF files" },
+                    { icon: "fas fa-file-pdf", text: "Text to PDF", description: "Create PDF from text files" },
+                    { icon: "fas fa-code", text: "HTML to PDF", description: "Convert web pages to PDF" }
+                ]
+            },
+            pdf: {
+                title: "PDF Editing Tool",
+                options: [
+                    { icon: "fas fa-palette", text: "Change Colors", description: "Modify text and background colors" },
+                    { icon: "fas fa-text-height", text: "Adjust Text Size", description: "Change font sizes throughout" },
+                    { icon: "fas fa-image", text: "Custom Background", description: "Add or change background" },
+                    { icon: "fas fa-crop", text: "Crop Pages", description: "Remove margins or unwanted areas" }
+                ]
+            },
+            album: {
+                title: "Photo Album Creator",
+                options: [
+                    { icon: "fas fa-cube", text: "3D Album", description: "Create interactive 3D photo albums" },
+                    { icon: "fas fa-star", text: "Unique Layouts", description: "Choose from special display types" },
+                    { icon: "fas fa-palette", text: "Custom Themes", description: "Apply color schemes and styles" },
+                    { icon: "fas fa-music", text: "Add Music", description: "Include background music in albums" }
+                ]
+            }
+        };
+
+        // DOM Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const activeTool = document.getElementById('activeTool');
+        const toolTitle = document.getElementById('toolTitle');
+        const toolOptions = document.getElementById('toolOptions');
+        const previewArea = document.getElementById('previewArea');
+        const processBtn = document.getElementById('processBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const toolCards = document.querySelectorAll('.tool-card');
+        const footerLinks = document.querySelectorAll('.footer-links a[data-tool]');
+
+        // Event Listeners
+        uploadArea.addEventListener('click', handleFileUpload);
+        processBtn.addEventListener('click', processFile);
+        downloadBtn.addEventListener('click', downloadFile);
+
+        // Add click events to tool cards
+        toolCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const tool = card.getAttribute('data-tool');
+                activateTool(tool);
+            });
+        });
+
+        // Add click events to footer tool links
+        footerLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tool = link.getAttribute('data-tool');
+                activateTool(tool);
+                
+                // Scroll to tools section
+                document.getElementById('tools').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Functions
+        function handleFileUpload() {
+            alert('In a real application, this would open a file dialog. For demonstration, we\'ll simulate a file upload.');
+            
+            // Simulate file upload
+            previewArea.innerHTML = `
+                <i class="fas fa-file-image" style="font-size: 3rem; color: #4361ee; margin-bottom: 1rem;"></i>
+                <h4>sample-image.jpg</h4>
+                <p>File uploaded successfully!</p>
+                <p class="small" style="margin-top: 0.5rem; color: #6c757d;">Size: 2.4 MB | Type: JPEG Image</p>
+            `;
+            
+            // Enable process button
+            processBtn.disabled = false;
+        }
+
+        function activateTool(tool) {
+            if (!toolData[tool]) return;
+            
+            // Update active tool display
+            toolTitle.textContent = toolData[tool].title;
+            toolOptions.innerHTML = '';
+            
+            // Add options for the selected tool
+            toolData[tool].options.forEach(option => {
+                const optionCard = document.createElement('div');
+                optionCard.className = 'option-card';
+                optionCard.innerHTML = `
+                    <div class="option-icon"><i class="${option.icon}"></i></div>
+                    <h4>${option.text}</h4>
+                    <p class="small">${option.description}</p>
+                `;
+                toolOptions.appendChild(optionCard);
+            });
+            
+            // Show the active tool section
+            activeTool.style.display = 'block';
+            
+            // Scroll to active tool
+            activeTool.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function processFile() {
+            alert('Processing file with selected options...');
+            
+            // Simulate processing
+            previewArea.innerHTML = `
+                <div style="text-align: center;">
+                    <i class="fas fa-check-circle" style="font-size: 3rem; color: #4cc9f0; margin-bottom: 1rem;"></i>
+                    <h4>File Processed Successfully!</h4>
+                    <p>Your file has been modified according to your settings.</p>
+                </div>
+            `;
+            
+            // Enable download button
+            downloadBtn.disabled = false;
+        }
+
+        function downloadFile() {
+            alert('Downloading your processed file...');
+            
+            // Simulate download
+            previewArea.innerHTML = `
+                <div style="text-align: center;">
+                    <i class="fas fa-download" style="font-size: 3rem; color: #4361ee; margin-bottom: 1rem;"></i>
+                    <h4>Download Complete!</h4>
+                    <p>Your file has been downloaded successfully.</p>
+                </div>
+            `;
+        }
+
+        // Initialize with first tool active
+        activateTool('resize');
+    </script>
+</body>
+</html>
